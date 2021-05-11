@@ -16,7 +16,8 @@
     "react/static-property-placement": [1, "property assignment"],
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "quotes": ["error", "single"]
+    "quotes": ["error", "single"],
+    "import/no-extraneous-dependencies": 0
   },
   "parserOptions": {
     "ecmaFeatures": {

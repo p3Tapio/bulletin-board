@@ -1,10 +1,10 @@
-/* eslint-disable react/react-in-jsx-scope */
+import React from 'react';
+import Login from './components/user/auth/Login';
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>TODO: Client</h1>
-      </header>
+    <div>
+      <Login />
     </div>
   );
 }

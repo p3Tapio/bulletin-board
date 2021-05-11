@@ -10,6 +10,7 @@ feathersClient.configure(restClient.axios(axios));
 feathersClient.configure(feathers.authentication());
 feathersClient.configure(
   auth({
+    // eslint-disable-next-line no-undef
     storage: window.sessionStorage,
     storageKey: 'feathers-react-jwt',
   })
