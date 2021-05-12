@@ -8,13 +8,14 @@ const FormInput = ({ label, name, type, ...props }) => {
   const [field, meta] = useField(name);
   const showError = meta.touched && meta.error;
 
-  const errorStyle = { marginTop: -2, marginBottom: 15 };
-  const okStyle = { marginTop: 18, marginBottom: 35 };
+  const errorStyle = { marginBottom: 20, alignSelf: 'flex-start' };
+  const okStyle = { marginBottom: 41 };
   const errorText = { color: 'red' };
 
   return (
     <>
       <TextField
+        className="authFormInput"
         theme="underline"
         id={name}
         label={label}

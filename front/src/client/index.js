@@ -15,5 +15,6 @@ feathersClient.configure(
     storageKey: 'feathers-react-jwt',
   })
 );
+export const userService = feathersClient.service('users');
 
 export default feathersClient;

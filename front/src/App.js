@@ -1,10 +1,10 @@
 import React from 'react';
-import Login from './components/user/auth/Login';
+import Authorization from './components/user/auth';
 
 function App() {
   return (
     <div>
-      <Login />
+      <Authorization />
     </div>
   );
 }
