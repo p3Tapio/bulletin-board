@@ -11,8 +11,8 @@ feathersClient.configure(feathers.authentication());
 feathersClient.configure(
   auth({
     // eslint-disable-next-line no-undef
-    storage: window.sessionStorage,
-    storageKey: 'feathers-react-jwt',
+    storage: window.localStorage,
+    storageKey: 'accessToken',
   })
 );
 export const userService = feathersClient.service('users');

@@ -1,5 +1,6 @@
-import { userService } from '../../client';
+import feathersClient, { userService } from '../../client';
 
+export const SET_USER_STATE = 'GET_USER_STATE';
 export const LOADING = 'LOADING';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAILED = 'REGISTER_FAILED';
@@ -16,16 +17,35 @@ export const registerUser = (newUser) => {
       const res = await userService.create(newUser);
       dispatch({
         type: REGISTER_SUCCESS,
-        user: res,
+        payload: res,
       });
     } catch (err) {
       dispatch({
         type: REGISTER_FAILED,
-        error: err.message,
+        payload: err.message,
       });
     }
   };
 };
+export const loginUser = (user) => {
+  return async (dispatch) => {
+    dispatch({ type: LOADING });
+    try {
+      const res = await feathersClient.authenticate({ ...user, strategy: 'local' });
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res,
+      });
+    } catch (err) {
+      dispatch({
+        type: LOGIN_FAILED,
+        payload: err.message,
+      });
+    }
+  };
+};
+export const clearLoginState = () => (dispatch) => dispatch({ type: CLEAR_LOGIN_STATE });
+export const setUserState = () => (dispatch) => dispatch({ type: SET_USER_STATE });
 
 export const loading = () => {
   return { type: LOADING };

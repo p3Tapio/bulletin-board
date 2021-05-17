@@ -1,0 +1,95 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { AppBarAction } from '@react-md/app-bar';
+import { Text } from '@react-md/typography';
+import {
+  AiOutlineHome,
+  AiOutlineSmile,
+  AiOutlineRight,
+  AiOutlineComment,
+  AiOutlineKey,
+  AiOutlineLike,
+} from 'react-icons/ai';
+import { useSelector } from 'react-redux';
+
+const linkStyle = {
+  textDecoration: 'none',
+  color: 'grey',
+  display: 'flex',
+  alignItems: 'center',
+};
+const appBarActionStyle = {
+  borderRadius: '5px',
+  height: '30px',
+  marginLeft: '5px',
+  marginRight: '5px',
+  padding: '10px',
+};
+
+const Navbar = () => {
+  const user = useSelector((x) => x.userData);
+  // eslint-disable-next-line no-console
+  console.log('user', user);
+  return (
+    <>
+      <div id="Navbar">
+        <AppBarAction style={{ ...appBarActionStyle, width: 100 }}>
+          <Link to="/" style={linkStyle}>
+            <AiOutlineHome size={22} style={{ marginBottom: '5px', marginRight: '5px' }} />
+            <Text type="button" component="p" style={{ marginRight: '5px' }}>
+              Home
+            </Text>
+          </Link>
+        </AppBarAction>
+        <AppBarAction style={{ ...appBarActionStyle, width: 140 }}>
+          <Link to="/bulletins" style={linkStyle}>
+            <AiOutlineComment size={22} style={{ marginBottom: '5px', marginRight: '5px' }} />
+            <Text type="button" component="p" style={{ marginRight: '5px' }}>
+              bulletins
+            </Text>
+          </Link>
+        </AppBarAction>
+        {user && user.accessToken ? (
+          <>
+            <AppBarAction style={{ ...appBarActionStyle, width: 130 }}>
+              <Link to="/userpage" style={linkStyle}>
+                <AiOutlineSmile size={22} style={{ marginBottom: '5px', marginRight: '5px' }} />
+                <Text type="button" component="p" style={{ marginRight: '5px' }}>
+                  userpage
+                </Text>
+              </Link>
+            </AppBarAction>
+            <AppBarAction style={{ ...appBarActionStyle, marginLeft: 'auto', width: 110 }}>
+              <Link to="/" style={linkStyle}>
+                <AiOutlineRight size={22} style={{ marginBottom: '5px', marginRight: '5px' }} />
+                <Text type="button" component="p" style={{ marginRight: '5px' }}>
+                  logout
+                </Text>
+              </Link>
+            </AppBarAction>
+          </>
+        ) : (
+          <>
+            <AppBarAction style={{ ...appBarActionStyle, width: 110 }}>
+              <Link to={{ pathname: '/auth', state: { showRegister: false } }} style={linkStyle}>
+                <AiOutlineKey size={22} style={{ marginBottom: '5px', marginRight: '5px' }} />
+                <Text type="button" component="p" style={{ marginRight: '5px' }}>
+                  login
+                </Text>
+              </Link>
+            </AppBarAction>
+            <AppBarAction style={{ ...appBarActionStyle, width: 130 }}>
+              <Link to={{ pathname: '/auth', state: { showRegister: true } }} style={linkStyle}>
+                <AiOutlineLike size={22} style={{ marginBottom: '5px', marginRight: '5px' }} />
+                <Text type="button" component="p" style={{ marginRight: '5px' }}>
+                  register
+                </Text>
+              </Link>
+            </AppBarAction>
+          </>
+        )}
+      </div>
+    </>
+  );
+};
+export default Navbar;

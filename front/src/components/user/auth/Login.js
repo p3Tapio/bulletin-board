@@ -7,21 +7,17 @@ import { Form } from '@react-md/form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAddMessage } from '@react-md/alert';
 import FormInput from './FormInput';
-import { registerValidation } from './validations';
+import { loginValidation } from './validations';
 import { clearLoginState } from '../../../state/actions/userActions';
 
-const initialValues = {
-  username: '',
-  password: '',
-  passwordConfirm: '',
-};
+const initialValues = { username: '', password: '' };
 
-const Register = ({ onSubmit, setShowRegister }) => (
+const Login = ({ onSubmit, setShowRegister }) => (
   <div className="authCard">
-    <Text type="headline-4">Register</Text>
-    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={registerValidation}>
+    <Text type="headline-4">Login</Text>
+    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={loginValidation}>
       {({ handleSubmit, resetForm, values }) => (
-        <RegisterForm
+        <LoginForm
           onSubmit={handleSubmit}
           resetForm={resetForm}
           values={values}
@@ -31,8 +27,7 @@ const Register = ({ onSubmit, setShowRegister }) => (
     </Formik>
   </div>
 );
-
-const RegisterForm = ({ onSubmit, resetForm, values, setShowRegister }) => {
+const LoginForm = ({ onSubmit, resetForm, values, setShowRegister }) => {
   const dispatch = useDispatch();
   const error = useSelector((x) => x.error);
   const addMessage = useAddMessage();
@@ -49,23 +44,17 @@ const RegisterForm = ({ onSubmit, resetForm, values, setShowRegister }) => {
       <div className="authInputWrap">
         <FormInput name="username" label="Username" type="text" value={values.username} />
         <FormInput name="password" label="Password" type="password" value={values.password} />
-        <FormInput
-          name="passwordConfirm"
-          label="Password confirmation"
-          type="password"
-          value={values.passwordConfirm}
-        />
       </div>
       <div className="authBtnWrap">
         <div style={{ color: 'grey', margin: '5px' }}>
-          <small>Already have an account?</small>
+          <small>Don&#39;t have an account?</small>
           <br />
           <small
             style={{ cursor: 'pointer' }}
             aria-hidden="true"
-            onClick={() => setShowRegister(false)}
+            onClick={() => setShowRegister(true)}
           >
-            Login here!
+            Register here!
           </small>
         </div>
         <div className="authBtnWrap">
@@ -85,16 +74,16 @@ const RegisterForm = ({ onSubmit, resetForm, values, setShowRegister }) => {
     </Form>
   );
 };
-Register.propTypes = {
+
+Login.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   setShowRegister: PropTypes.func.isRequired,
 };
-
-RegisterForm.propTypes = {
+LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   resetForm: PropTypes.func.isRequired,
   setShowRegister: PropTypes.func.isRequired,
   values: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default Register;
+export default Login;

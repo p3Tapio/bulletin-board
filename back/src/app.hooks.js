@@ -18,7 +18,7 @@ module.exports = {
     create: [
       (context) => {
         // login = context.method: create, path: authentication
-        //  reg = method: create, path; users ---> loggaus user.hooks.js:ssä
+        //  reg = method: create, path; users --->  user.hooks.js
         //  console.log(`context.data`, context.data); --> sisääntuleva objekti
 
         if (context.result.authentication) delete context.result.authentication;
