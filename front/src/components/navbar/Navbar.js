@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { AppBarAction } from '@react-md/app-bar';
 import { Text } from '@react-md/typography';
 import {
@@ -10,7 +10,8 @@ import {
   AiOutlineKey,
   AiOutlineLike,
 } from 'react-icons/ai';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearLoginState } from '../../state/actions/userActions';
 
 const linkStyle = {
   textDecoration: 'none',
@@ -28,8 +29,14 @@ const appBarActionStyle = {
 
 const Navbar = () => {
   const user = useSelector((x) => x.userData);
+  const dispatch = useDispatch();
+  const history = useHistory();
   // eslint-disable-next-line no-console
   console.log('user', user);
+  const handleLogout = () => {
+    dispatch(clearLoginState());
+    history.push('/');
+  };
   return (
     <>
       <div id="Navbar">
@@ -60,12 +67,12 @@ const Navbar = () => {
               </Link>
             </AppBarAction>
             <AppBarAction style={{ ...appBarActionStyle, marginLeft: 'auto', width: 110 }}>
-              <Link to="/" style={linkStyle}>
+              <span onClick={() => handleLogout()} style={linkStyle} aria-hidden="true">
                 <AiOutlineRight size={22} style={{ marginBottom: '5px', marginRight: '5px' }} />
                 <Text type="button" component="p" style={{ marginRight: '5px' }}>
                   logout
                 </Text>
-              </Link>
+              </span>
             </AppBarAction>
           </>
         ) : (

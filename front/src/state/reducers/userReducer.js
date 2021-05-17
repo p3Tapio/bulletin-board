@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-console */
 import {
   LOADING,
   REGISTER_SUCCESS,
@@ -9,18 +8,7 @@ import {
   CLEAR_LOGIN_STATE,
   SET_USER_STATE,
 } from '../actions/userActions';
-import { getUser, setUser, setToken, getToken } from '../localStorage';
-
-// const getInitialState = () => {
-//   if (getUser() && getToken()) {
-//     return { accessToken: getToken(), user: getUser(), loading: false, error: '' };
-//   }
-//   return {
-//     userData: { accessToken: '', user: { _id: '', username: '' } },
-//     loading: false,
-//     error: '',
-//   };
-// };
+import { getUser, setUser, setToken, getToken, clearLocalStorage } from '../localStorage';
 
 const initialState = {
   userData: { accessToken: '', user: { _id: '', username: '' } },
@@ -57,6 +45,7 @@ const userReducer = (state = initialState, action) => {
     case LOGIN_FAILED:
       return { ...state, error: action.payload, loading: false };
     case CLEAR_LOGIN_STATE:
+      clearLocalStorage();
       return { userData: {}, loading: false, error: '' };
     default:
       return state;
