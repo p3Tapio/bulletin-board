@@ -9,6 +9,7 @@ import {
   SET_USER_STATE,
 } from '../actions/userActions';
 import { getUser, setUser, setToken, getToken, clearLocalStorage } from '../localStorage';
+import feathersClient from '../../client';
 
 const initialState = {
   userData: { accessToken: '', user: { _id: '', username: '' } },
@@ -46,6 +47,8 @@ const userReducer = (state = initialState, action) => {
       return { ...state, error: action.payload, loading: false };
     case CLEAR_LOGIN_STATE:
       clearLocalStorage();
+      feathersClient.logout();
+      // -- tarpeen? "calls the remove method of the authentication service" (käyttöön jos sessiot backendiin..)
       return { userData: {}, loading: false, error: '' };
     default:
       return state;

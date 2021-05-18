@@ -1,7 +1,7 @@
 @import '~@react-md/theme/dist/color-palette';
 $rmd-theme-light: true;
 $rmd-theme-primary: $rmd-purple-500;
-$rmd-theme-secondary: $rmd-pink-a-400;
+$rmd-theme-secondary: #e8f1f2;
 $rmd-theme-warning: $rmd-deep-orange-a-200;
 $rmd-theme-error: $rmd-red-500;
 $rmd-theme-success: $rmd-green-a-700;
@@ -9,3 +9,7 @@ $rmd-theme-light-background: #e8f1f2;
 $rmd-theme-light-surface: #fff;
 $rmd-theme-dark-background: #303030;
 $rmd-theme-dark-surface: $rmd-grey-800;
+
+$rmd-form-active-color: #385a5e;
+$rmd-text-field-active-color: #87a9ac;
+$rmd-text-field-border-color: #87a9ac;

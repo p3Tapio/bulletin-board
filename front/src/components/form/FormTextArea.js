@@ -1,10 +1,10 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { useField } from 'formik';
-import { TextField } from '@react-md/form';
+import { TextArea } from '@react-md/form';
 import PropTypes from 'prop-types';
 
-const FormInput = ({ label, name, type, ...props }) => {
+const FormTextArea = ({ label, name, rows, ...props }) => {
   const [field, meta] = useField(name);
   const showError = meta.touched && meta.error;
 
@@ -14,13 +14,14 @@ const FormInput = ({ label, name, type, ...props }) => {
 
   return (
     <>
-      <TextField
+      <TextArea
         className="authFormInput"
         theme="underline"
         id={name}
         label={label}
         name={name}
-        type={type}
+        type="text"
+        rows={rows}
         {...field}
         {...props}
       />
@@ -30,11 +31,11 @@ const FormInput = ({ label, name, type, ...props }) => {
     </>
   );
 };
-
-FormInput.propTypes = {
+FormTextArea.propTypes = {
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
+  rows: PropTypes.number.isRequired,
 };
 
-export default FormInput;
+export default FormTextArea;

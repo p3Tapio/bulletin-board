@@ -6,7 +6,7 @@ import { Button } from '@react-md/button';
 import { Form } from '@react-md/form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAddMessage } from '@react-md/alert';
-import FormInput from './FormInput';
+import FormTextField from '../../form/FormTextField';
 import { loginValidation } from './validations';
 import { clearLoginState } from '../../../state/actions/userActions';
 
@@ -42,8 +42,8 @@ const LoginForm = ({ onSubmit, resetForm, values, setShowRegister }) => {
   return (
     <Form>
       <div className="authInputWrap">
-        <FormInput name="username" label="Username" type="text" value={values.username} />
-        <FormInput name="password" label="Password" type="password" value={values.password} />
+        <FormTextField name="username" label="Username" type="text" value={values.username} />
+        <FormTextField name="password" label="Password" type="password" value={values.password} />
       </div>
       <div className="authBtnWrap">
         <div style={{ color: 'grey', margin: '5px' }}>

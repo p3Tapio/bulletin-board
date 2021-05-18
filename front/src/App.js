@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUserState } from './state/actions/userActions';
 
+import Bulletins from './components/bulletins';
 import Authorization from './components/user/auth';
 import Home from './components/Home';
 import Userpage from './components/user/Userpage';
@@ -16,9 +17,10 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <div style={{ marginTop: '50px' }}>
+      <div>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/bulletins" component={Bulletins} />
           <Route path="/auth" component={Authorization} />
           <PrivateRoute path="/userpage" component={Userpage} />
         </Switch>

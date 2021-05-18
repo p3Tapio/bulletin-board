@@ -35,22 +35,12 @@ module.exports = {
         delete context.dispatch.user.password;
       },
     ],
-    update: [],
-    patch: [],
-    remove: [],
   },
-
   error: {
     all: [
       (context) => {
         console.log(context.error);
       },
     ],
-    find: [],
-    get: [],
-    create: [],
-    update: [],
-    patch: [],
-    remove: [],
   },
 };

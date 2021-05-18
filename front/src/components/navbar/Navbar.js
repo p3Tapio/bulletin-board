@@ -31,12 +31,12 @@ const Navbar = () => {
   const user = useSelector((x) => x.userData);
   const dispatch = useDispatch();
   const history = useHistory();
-  // eslint-disable-next-line no-console
-  console.log('user', user);
+
   const handleLogout = () => {
     dispatch(clearLoginState());
     history.push('/');
   };
+
   return (
     <>
       <div id="Navbar">

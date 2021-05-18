@@ -46,7 +46,6 @@ export const loginUser = (user) => {
 };
 export const clearLoginState = () => (dispatch) => dispatch({ type: CLEAR_LOGIN_STATE });
 export const setUserState = () => (dispatch) => dispatch({ type: SET_USER_STATE });
-
 export const loading = () => {
   return { type: LOADING };
 };

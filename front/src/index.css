@@ -22,6 +22,10 @@ body {
   justify-content: center;
   align-items: center;
 }
+.centerVertical {
+  display: flex;
+  justify-content: center;
+}
 .verticalDivider {
   border-left: 1px solid #9bb2b4;
   height: 25px;
@@ -35,7 +39,6 @@ body {
   -webkit-box-shadow: -7px 10px 16px -3px rgba(0, 0, 0, 0.22);
   -moz-box-shadow: -7px 10px 16px -3px rgba(0, 0, 0, 0.22);
 }
-
 .authInputWrap {
   display: flex;
   flex-direction: column;
@@ -45,7 +48,6 @@ body {
   width: 100%;
   color: 'darkgray';
 }
-
 .authBtnWrap {
   display: flex;
   flex-wrap: wrap-reverse;
@@ -53,4 +55,22 @@ body {
   flex-direction: row;
   justify-content: space-between;
   margin-top: 10px;
+}
+.headerCard {
+  background-color: white;
+  width: 800px;
+  margin-top: 20px;
+  padding: 20px;
+
+  box-shadow: -7px 10px 16px -3px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow: -7px 10px 16px -3px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: -7px 10px 16px -3px rgba(0, 0, 0, 0.22);
+}
+.newBulletinCard {
+  width: 800px;
+  margin-top: 20px;
+  padding: 20px;
+  box-shadow: -7px 10px 16px -3px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow: -7px 10px 16px -3px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: -7px 10px 16px -3px rgba(0, 0, 0, 0.22);
 }
