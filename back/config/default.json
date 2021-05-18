@@ -28,5 +28,5 @@
       "passwordField": "password"
     }
   },
-  "mongodb": "mongodb://localhost:27017/bulletin-board"
+  "mongodb": "MONGODB_URI"
 }

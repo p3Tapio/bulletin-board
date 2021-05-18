@@ -14,7 +14,7 @@ const bulletValidation = yup.object({
   header: yup
     .string()
     .max(50, 'Header must be 50 characters or less')
-    .min(4, 'Header must be 4 characters or more')
+    .min(5, 'Header must be 5 characters or more')
     .required('Header is required'),
   description: yup
     .string()
