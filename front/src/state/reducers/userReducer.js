@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import {
-  LOADING,
+  LOADING_USER,
   REGISTER_SUCCESS,
   REGISTER_FAILED,
   LOGIN_SUCCESS,
@@ -19,10 +19,14 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_USER_STATE:
-      return { userData: { accessToken: getToken(), user: getUser() }, loading: false, error: '' };
-    case LOADING:
+    case LOADING_USER:
       return { ...state, loading: true, error: '' };
+    case SET_USER_STATE:
+      return {
+        userData: { accessToken: getToken(), user: getUser() },
+        loading: false,
+        error: '',
+      };
     case REGISTER_SUCCESS:
       setUser({ _id: action.payload.user._id, username: action.payload.user.username });
       setToken(action.payload.accessToken);

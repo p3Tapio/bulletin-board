@@ -5,13 +5,12 @@ import { useSelector } from 'react-redux';
 import BulletinDialog from './newBulletin';
 
 const Userpage = () => {
-  const userData = useSelector((x) => x.userData);
+  const user = useSelector((x) => x.userState.userData.user);
   const [showDialog, setShowDialog] = useState(false);
-
   return (
     <div className="centercenter">
       <div className="headerCard">
-        <Text type="headline-4">Hi, {userData.user.username}!</Text>
+        <Text type="headline-4">Hi, {user.username}!</Text>
         <Text type="body-1">
           This will be a user page, where users can see their bulletins and create new, edit or
           delete old ones.

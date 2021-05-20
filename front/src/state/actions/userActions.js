@@ -1,7 +1,7 @@
 import feathersClient, { userService } from '../../client';
 
 export const SET_USER_STATE = 'GET_USER_STATE';
-export const LOADING = 'LOADING';
+export const LOADING_USER = 'LOADING_USER';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAILED = 'REGISTER_FAILED';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
@@ -12,7 +12,7 @@ export const CLEAR_LOGIN_STATE = 'CLEAR_LOGIN_STATE';
 
 export const registerUser = (newUser) => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
+    dispatch({ type: LOADING_USER });
     try {
       const res = await userService.create(newUser);
       dispatch({
@@ -29,7 +29,7 @@ export const registerUser = (newUser) => {
 };
 export const loginUser = (user) => {
   return async (dispatch) => {
-    dispatch({ type: LOADING });
+    dispatch({ type: LOADING_USER });
     try {
       const res = await feathersClient.authenticate({ ...user, strategy: 'local' });
       dispatch({
@@ -44,8 +44,6 @@ export const loginUser = (user) => {
     }
   };
 };
+
 export const clearLoginState = () => (dispatch) => dispatch({ type: CLEAR_LOGIN_STATE });
 export const setUserState = () => (dispatch) => dispatch({ type: SET_USER_STATE });
-export const loading = () => {
-  return { type: LOADING };
-};

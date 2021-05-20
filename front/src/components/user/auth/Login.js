@@ -29,7 +29,7 @@ const Login = ({ onSubmit, setShowRegister }) => (
 );
 const LoginForm = ({ onSubmit, resetForm, values, setShowRegister }) => {
   const dispatch = useDispatch();
-  const error = useSelector((x) => x.error);
+  const error = useSelector((x) => x.userState.error);
   const addMessage = useAddMessage();
   if (error) {
     addMessage({ action: 'Close', children: error });
@@ -83,7 +83,10 @@ LoginForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   resetForm: PropTypes.func.isRequired,
   setShowRegister: PropTypes.func.isRequired,
-  values: PropTypes.instanceOf(Object).isRequired,
+  values: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Login;

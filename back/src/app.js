@@ -10,15 +10,13 @@ const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
-const middleware = require('./middleware');
 const services = require('./services');
 const appHooks = require('./app.hooks');
 const channels = require('./channels');
-const dotenv = require('dotenv');
-dotenv.config();
-// const authentication = require('./services/auth/auth.service');
 
 const mongoose = require('./mongoose');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express(feathers());
 
@@ -35,7 +33,7 @@ app.use(compress());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
-// Host the public folder
+// Host the public folder ( TODO HUOM PROD 404t)
 app.use('/', express.static(app.get('public')));
 
 // Set up Plugins and providers
@@ -44,9 +42,6 @@ app.configure(socketio());
 
 app.configure(mongoose);
 
-// Configure other middleware (see `middleware/index.js`)
-app.configure(middleware);
-// app.configure(authentication);
 // Set up our services (see `services/index.js`)
 app.configure(services);
 // Set up event channels (see channels.js)

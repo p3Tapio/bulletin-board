@@ -8,7 +8,7 @@ import Register from './Register';
 
 const Authorization = () => {
   const dispatch = useDispatch();
-  const userData = useSelector((x) => x.userData);
+  const user = useSelector((x) => x.userState.userData);
   const location = useLocation();
   const [showRegister, setShowRegister] = useState();
 
@@ -25,7 +25,7 @@ const Authorization = () => {
     resetForm();
   };
 
-  if (userData && userData.accessToken) return <Redirect to="/userpage" />;
+  if (user && user.accessToken) return <Redirect to="/userpage" />;
 
   return (
     <MessageQueue id="auth-error">

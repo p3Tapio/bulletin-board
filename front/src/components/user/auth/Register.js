@@ -34,7 +34,7 @@ const Register = ({ onSubmit, setShowRegister }) => (
 
 const RegisterForm = ({ onSubmit, resetForm, values, setShowRegister }) => {
   const dispatch = useDispatch();
-  const error = useSelector((x) => x.error);
+  const error = useSelector((x) => x.userState.error);
   const addMessage = useAddMessage();
   if (error) {
     addMessage({ action: 'Close', children: error });
@@ -94,7 +94,11 @@ RegisterForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   resetForm: PropTypes.func.isRequired,
   setShowRegister: PropTypes.func.isRequired,
-  values: PropTypes.instanceOf(Object).isRequired,
+  values: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired,
+    passwordConfirm: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Register;

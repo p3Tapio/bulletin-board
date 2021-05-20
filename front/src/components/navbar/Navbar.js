@@ -28,7 +28,7 @@ const appBarActionStyle = {
 };
 
 const Navbar = () => {
-  const user = useSelector((x) => x.userData);
+  const user = useSelector((x) => x.userState.userData);
   const dispatch = useDispatch();
   const history = useHistory();
 

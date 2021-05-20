@@ -8,25 +8,17 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: [],
+    remove: []
   },
 
   after: {
     all: [],
     find: [],
     get: [],
-    create: [
-      //   (context) => {
-      //     // login = context.method: create, path: authentication
-      //     //  reg = method: create, path; users --->  user.hooks.js
-      //     //  console.log(`context.data`, context.data); --> sisääntuleva objekti
-      //     if (context.result.authentication) delete context.result.authentication;
-      //     return context;
-      //   },
-    ],
+    create: [],
     update: [],
     patch: [],
-    remove: [],
+    remove: []
   },
 
   error: {
@@ -36,6 +28,6 @@ module.exports = {
     create: [],
     update: [],
     patch: [],
-    remove: [],
-  },
+    remove: []
+  }
 };

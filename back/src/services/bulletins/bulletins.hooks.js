@@ -35,6 +35,8 @@ module.exports = {
     create: [
       async (context) => {
         const UserModel = context.app.service('users').Model;
+        const bulletModel = context.app.service('bulletins').Model;
+
         const userId = decode(context.params.authentication.accessToken).sub;
         const user = await UserModel.findOne({
           _id: userId,
@@ -42,6 +44,12 @@ module.exports = {
         if (!user) throw new Error('No user found :(');
         user.bulletins = user.bulletins.concat(context.result._id);
         await user.save();
+
+        const populated = await bulletModel
+          .findOne({ _id: context.result._id })
+          .populate('user', { username: 1 });
+        context.result = populated;
+        return context;
       },
     ],
     update: [],

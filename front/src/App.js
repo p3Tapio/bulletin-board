@@ -10,10 +10,14 @@ import Userpage from './components/user/Userpage';
 
 import PrivateRoute from './state/PrivateRoute';
 import Navbar from './components/navbar/Navbar';
+import { getBulletins } from './state/actions/bulletinActions';
 
 const App = () => {
   const dispatch = useDispatch();
-  useEffect(() => dispatch(setUserState()), [dispatch]);
+  useEffect(() => {
+    dispatch(setUserState());
+    dispatch(getBulletins());
+  }, [dispatch]);
   return (
     <>
       <Navbar />
