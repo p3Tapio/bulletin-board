@@ -19,6 +19,7 @@ feathersClient.configure(
     storageKey: 'accessToken',
   })
 );
+
 export const userService = feathersClient.service('users');
 export const bulletinService = feathersClient.service('bulletins');
 export default feathersClient;

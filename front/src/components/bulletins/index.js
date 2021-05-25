@@ -17,11 +17,13 @@ const Bulletins = () => {
       </div>
       <br />
       <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '50px' }}>
-        {bulletins.reverse().map((b) => (
-          <div key={b._id}>
-            <Bulletin bulletin={b} />
-          </div>
-        ))}
+        {bulletins
+          .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+          .map((b) => (
+            <div key={b._id}>
+              <Bulletin bulletin={b} />
+            </div>
+          ))}
       </div>
     </>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import {
   GET_BULLETINS,
   FAILED_TO_GET,
@@ -21,8 +22,7 @@ const bulletinReducer = (state = initialState, action) => {
     case FAILED_TO_GET:
       return { ...state, error: action.payload, loading: false };
     case BULLETIN_CREATED:
-      // eslint-disable-next-line no-console
-      console.log('action.payload', action.payload);
+      if (state.bulletins.find((x) => x._id === action.payload._id)) return state;
       return {
         ...state,
         bulletins: state.bulletins.concat(action.payload),

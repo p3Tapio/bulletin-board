@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 
 const bulletinOptions = [
   { value: '', key: '' },
-  { value: 'Cat_1', key: 'Category 1' },
-  { value: 'Cat_2', key: 'Category 2' },
-  { value: 'Cat_3', key: 'Category 3' },
-  { value: 'Cat_4', key: 'Category 4' },
+  { value: 'forSale', key: 'For sale' },
+  { value: 'housing', key: 'Housing' },
+  { value: 'jobs', key: 'Jobs' },
+  { value: 'services', key: 'Services' },
 ];
 
 const FormSelect = ({ label, name, options, ...props }) => {

@@ -22,6 +22,7 @@ export const getBulletins = () => {
     }
   };
 };
-export const createdBulletin = (newBulletin) => (dispatch) => {
+
+export const bulletinCreated = (newBulletin) => (dispatch) => {
   dispatch({ type: BULLETIN_CREATED, payload: newBulletin });
 };

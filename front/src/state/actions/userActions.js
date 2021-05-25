@@ -8,6 +8,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILED = 'LOGOUT_FAILED';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILED = 'LOGOUT_FAILED';
+export const UPDATE_BULLETINS = 'UPDATE_BULLETINS';
 export const CLEAR_LOGIN_STATE = 'CLEAR_LOGIN_STATE';
 
 export const registerUser = (newUser) => {
@@ -49,6 +50,8 @@ export const loginUser = (user) => {
     }
   };
 };
-
+export const updateUserBulletins = (newBulletin) => (dispatch) => {
+  return dispatch({ type: UPDATE_BULLETINS, payload: newBulletin });
+};
 export const clearLoginState = () => (dispatch) => dispatch({ type: CLEAR_LOGIN_STATE });
 export const setUserState = () => (dispatch) => dispatch({ type: SET_USER_STATE });

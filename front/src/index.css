@@ -74,3 +74,15 @@ body {
   -webkit-box-shadow: -7px 10px 16px -3px rgba(0, 0, 0, 0.22);
   -moz-box-shadow: -7px 10px 16px -3px rgba(0, 0, 0, 0.22);
 }
+.accordion-item.collapsed {
+  display: none;
+}
+
+.accordion-item.expanded {
+  display: block;
+}
+
+.accordion-button {
+  display: block;
+  width: 100%;
+}

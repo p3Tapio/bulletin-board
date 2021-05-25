@@ -7,12 +7,20 @@ import {
   LOGIN_FAILED,
   CLEAR_LOGIN_STATE,
   SET_USER_STATE,
+  UPDATE_BULLETINS,
 } from '../actions/userActions';
-import { getUser, setUser, setToken, getToken, clearLocalStorage } from '../localStorage';
+import {
+  getUser,
+  setUser,
+  setToken,
+  getToken,
+  clearLocalStorage,
+  addBulletin,
+} from '../localStorage';
 import feathersClient from '../../client';
 
 const initialState = {
-  userData: { accessToken: '', user: { _id: '', username: '' } },
+  userData: { accessToken: '', user: { _id: '', username: '', bulletins: [] } },
   loading: false,
   error: '',
 };
@@ -29,7 +37,11 @@ const userReducer = (state = initialState, action) => {
         error: '',
       };
     case REGISTER_SUCCESS:
-      setUser({ _id: action.payload.user._id, username: action.payload.user.username });
+      setUser({
+        _id: action.payload.user._id,
+        username: action.payload.user.username,
+        bulletins: [],
+      });
       setToken(action.payload.accessToken);
       return {
         ...state,
@@ -40,7 +52,11 @@ const userReducer = (state = initialState, action) => {
     case REGISTER_FAILED:
       return { ...state, error: action.payload, loading: false };
     case LOGIN_SUCCESS:
-      setUser({ _id: action.payload.user._id, username: action.payload.user.username });
+      setUser({
+        _id: action.payload.user._id,
+        username: action.payload.user.username,
+        bulletins: action.payload.user.bulletins,
+      });
       setToken(action.payload.accessToken);
       return {
         ...state,
@@ -55,6 +71,19 @@ const userReducer = (state = initialState, action) => {
       feathersClient.logout();
       // -- tarpeen? "calls the remove method of the authentication service" (käyttöön ainakin jos sessiot backendiin..)
       return { userData: {}, loading: false, error: '' };
+    case UPDATE_BULLETINS:
+      addBulletin(action.payload);
+      return {
+        userData: {
+          ...state.userData,
+          user: {
+            ...state.userData.user,
+            bulletins: state.userData.user.bulletins.concat(action.payload),
+          },
+        },
+        loading: false,
+        error: '',
+      };
     default:
       return state;
   }

@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import { Text } from '@react-md/typography';
 import { Button } from '@react-md/button';
 import { Form } from '@react-md/form';
-import { useDispatch, useSelector } from 'react-redux';
-import { useAddMessage } from '@react-md/alert';
+import { useDispatch } from 'react-redux';
 import FormTextField from '../../form/FormTextField';
 import { loginValidation } from './validations';
 import { clearLoginState } from '../../../state/actions/userActions';
@@ -29,12 +28,7 @@ const Login = ({ onSubmit, setShowRegister }) => (
 );
 const LoginForm = ({ onSubmit, resetForm, values, setShowRegister }) => {
   const dispatch = useDispatch();
-  const error = useSelector((x) => x.userState.error);
-  const addMessage = useAddMessage();
-  if (error) {
-    addMessage({ action: 'Close', children: error });
-    dispatch(clearLoginState());
-  }
+
   const handleReset = () => {
     resetForm();
     dispatch(clearLoginState());

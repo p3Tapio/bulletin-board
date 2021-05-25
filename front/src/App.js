@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setUserState } from './state/actions/userActions';
+import { useSelector, useDispatch } from 'react-redux';
+import { useAddMessage } from '@react-md/alert';
+import { clearLoginState, setUserState } from './state/actions/userActions';
 import { bulletinService } from './client';
 
 import Bulletins from './components/bulletins';
@@ -11,19 +12,28 @@ import Userpage from './components/user/Userpage';
 
 import PrivateRoute from './state/PrivateRoute';
 import Navbar from './components/navbar/Navbar';
-import { getBulletins, createdBulletin } from './state/actions/bulletinActions';
+import { getBulletins, bulletinCreated } from './state/actions/bulletinActions';
 
 const App = () => {
   const dispatch = useDispatch();
-  bulletinService.on('created', (response) => {
-    // eslint-disable-next-line no-console
-    console.log('CREATED:  ----- \n', response);
-    dispatch(createdBulletin(response));
-  });
+  const userError = useSelector((x) => x.userState.error);
+  const bulletinsError = useSelector((x) => x.bulletinsState.error);
+  const addMessage = useAddMessage();
+
+  bulletinService.on('created', (response) => dispatch(bulletinCreated(response)));
+
   useEffect(() => {
     dispatch(setUserState());
     dispatch(getBulletins());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (userError || bulletinsError) {
+      const error = userError || bulletinsError;
+      addMessage({ action: 'Close', children: error });
+      dispatch(clearLoginState());
+    }
+  }, [addMessage, bulletinsError, dispatch, userError]);
 
   return (
     <>
