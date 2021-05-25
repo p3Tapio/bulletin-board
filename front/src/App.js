@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setUserState } from './state/actions/userActions';
+import { bulletinService } from './client';
 
 import Bulletins from './components/bulletins';
 import Authorization from './components/user/auth';
@@ -10,14 +11,20 @@ import Userpage from './components/user/Userpage';
 
 import PrivateRoute from './state/PrivateRoute';
 import Navbar from './components/navbar/Navbar';
-import { getBulletins } from './state/actions/bulletinActions';
+import { getBulletins, createdBulletin } from './state/actions/bulletinActions';
 
 const App = () => {
   const dispatch = useDispatch();
+  bulletinService.on('created', (response) => {
+    // eslint-disable-next-line no-console
+    console.log('CREATED:  ----- \n', response);
+    dispatch(createdBulletin(response));
+  });
   useEffect(() => {
     dispatch(setUserState());
     dispatch(getBulletins());
   }, [dispatch]);
+
   return (
     <>
       <Navbar />

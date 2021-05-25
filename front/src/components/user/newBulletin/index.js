@@ -5,11 +5,12 @@ import { AppBar, AppBarNav } from '@react-md/app-bar';
 
 import { AiOutlineArrowLeft } from 'react-icons/ai';
 import NewBulletin from './NewBulletin';
+import useBulletin from '../../../hooks/useBulletin';
 
 const BulletinDialog = ({ showDialog, setShowDialog }) => {
-  const handleSubmit = (values) => {
-    // eslint-disable-next-line no-console
-    console.log('values', values);
+  const { createBulletin } = useBulletin();
+  const handleSubmit = async (values) => {
+    await createBulletin(values, setShowDialog);
   };
   return (
     <Dialog

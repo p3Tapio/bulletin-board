@@ -23,17 +23,18 @@ module.exports = {
     find: [],
     get: [],
     create: [
-      async (context) => {
-        const userData = {
-          username: context.data.username,
-          password: context.data.passwordConfirm,
-          strategy: 'local',
-        };
-        context.dispatch = await context.app
-          .service('authentication')
-          .create(userData, context.result);
-        delete context.dispatch.user.password;
-      },
+      // LOGGAA SISÄÄN MUTTA: autentikaatio epäonnistuu uutta bulletinia luodessa
+      // async (context) => {
+      //   const userData = {
+      //     username: context.data.username,
+      //     password: context.data.passwordConfirm,
+      //     strategy: 'local',
+      //   };
+      //   context.dispatch = await context.app
+      //     .service('authentication')
+      //     .create(userData, context.result);
+      //   delete context.dispatch.user.password;
+      // },
     ],
   },
   error: {

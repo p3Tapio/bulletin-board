@@ -14,7 +14,12 @@ export const registerUser = (newUser) => {
   return async (dispatch) => {
     dispatch({ type: LOADING_USER });
     try {
-      const res = await userService.create(newUser);
+      await userService.create(newUser);
+      const res = await feathersClient.authenticate({
+        username: newUser.username,
+        password: newUser.password,
+        strategy: 'local',
+      });
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res,

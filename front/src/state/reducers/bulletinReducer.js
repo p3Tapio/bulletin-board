@@ -1,4 +1,9 @@
-import { GET_BULLETINS, FAILED_TO_GET, LOADING_BULLETINS } from '../actions/bulletinActions';
+import {
+  GET_BULLETINS,
+  FAILED_TO_GET,
+  LOADING_BULLETINS,
+  BULLETIN_CREATED,
+} from '../actions/bulletinActions';
 
 const initialState = {
   bulletins: [],
@@ -15,6 +20,15 @@ const bulletinReducer = (state = initialState, action) => {
     }
     case FAILED_TO_GET:
       return { ...state, error: action.payload, loading: false };
+    case BULLETIN_CREATED:
+      // eslint-disable-next-line no-console
+      console.log('action.payload', action.payload);
+      return {
+        ...state,
+        bulletins: state.bulletins.concat(action.payload),
+        error: '',
+        loading: false,
+      };
     default:
       return state;
   }

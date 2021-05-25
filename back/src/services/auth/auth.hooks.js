@@ -18,6 +18,18 @@ module.exports = {
     get: [],
     create: [
       (context) => {
+        // USERIIN KÄYTTÄJÄN BULLETIT?
+        //   const User = context.app.service('users').Model;
+        //   const id = context.result.user._id;
+        //   const populated = await User.findOne({
+        //     _id: id,
+        //   }).populate('bulletins');
+        //   if (context.result.user && populated && populated.bulletins) {
+        //     context.result.user = {
+        //       ...context.result.user,
+        //       bulletins: populated.bulletins,
+        //     };
+        //   }
         if (context.result.authentication) delete context.result.authentication;
         return context;
       },

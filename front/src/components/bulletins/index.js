@@ -17,7 +17,7 @@ const Bulletins = () => {
       </div>
       <br />
       <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '50px' }}>
-        {bulletins.map((b) => (
+        {bulletins.reverse().map((b) => (
           <div key={b._id}>
             <Bulletin bulletin={b} />
           </div>

@@ -22,6 +22,7 @@ const userReducer = (state = initialState, action) => {
     case LOADING_USER:
       return { ...state, loading: true, error: '' };
     case SET_USER_STATE:
+      if (getToken()) feathersClient.reAuthenticate();
       return {
         userData: { accessToken: getToken(), user: getUser() },
         loading: false,
@@ -52,7 +53,7 @@ const userReducer = (state = initialState, action) => {
     case CLEAR_LOGIN_STATE:
       clearLocalStorage();
       feathersClient.logout();
-      // -- tarpeen? "calls the remove method of the authentication service" (käyttöön jos sessiot backendiin..)
+      // -- tarpeen? "calls the remove method of the authentication service" (käyttöön ainakin jos sessiot backendiin..)
       return { userData: {}, loading: false, error: '' };
     default:
       return state;

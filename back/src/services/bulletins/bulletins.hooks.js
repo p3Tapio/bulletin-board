@@ -6,14 +6,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [
-      async (context) => {
-        authenticate('jwt');
-        const userId = decode(context.params.authentication.accessToken).sub;
-        context.data.user = userId;
-        return context;
-      },
-    ],
+    create: [authenticate('jwt')],
     update: [authenticate('jwt')],
     patch: [authenticate('jwt')],
     remove: [authenticate('jwt')],

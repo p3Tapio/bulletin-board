@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useLocation } from 'react-router-dom';
-import { MessageQueue } from '@react-md/alert';
 import { loginUser, registerUser } from '../../../state/actions/userActions';
 import Login from './Login';
 import Register from './Register';
@@ -28,16 +27,13 @@ const Authorization = () => {
   if (user && user.accessToken) return <Redirect to="/userpage" />;
 
   return (
-    <MessageQueue id="auth-error">
-      <div className="centercenter" style={{ width: '100%' }}>
-        {showRegister ? (
-          <Register onSubmit={handleRegister} setShowRegister={setShowRegister} />
-        ) : (
-          <Login onSubmit={handleLogin} setShowRegister={setShowRegister} />
-        )}
-      </div>
-      {/* )} */}
-    </MessageQueue>
+    <div className="centercenter" style={{ width: '100%' }}>
+      {showRegister ? (
+        <Register onSubmit={handleRegister} setShowRegister={setShowRegister} />
+      ) : (
+        <Login onSubmit={handleLogin} setShowRegister={setShowRegister} />
+      )}
+    </div>
   );
 };
 

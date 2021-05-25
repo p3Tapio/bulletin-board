@@ -3,8 +3,10 @@ import auth from '@feathersjs/authentication-client';
 import io from 'socket.io-client';
 import socketio from '@feathersjs/socketio-client';
 
+const host = process.env.REACT_APP_API_URL;
+
 const feathersClient = feathers();
-const socket = io(process.env.REACT_APP_API_URL, {
+const socket = io(host, {
   transports: ['websocket'],
   forceNew: true,
 });
@@ -17,8 +19,6 @@ feathersClient.configure(
     storageKey: 'accessToken',
   })
 );
-
 export const userService = feathersClient.service('users');
 export const bulletinService = feathersClient.service('bulletins');
-
 export default feathersClient;

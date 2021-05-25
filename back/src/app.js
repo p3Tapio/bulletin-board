@@ -37,14 +37,10 @@ app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 app.use('/', express.static(app.get('public')));
 
 // Set up Plugins and providers
-app.configure(express.rest());
 app.configure(socketio());
-
 app.configure(mongoose);
 
-// Set up our services (see `services/index.js`)
 app.configure(services);
-// Set up event channels (see channels.js)
 app.configure(channels);
 
 // Configure a middleware for 404s and the error handler
