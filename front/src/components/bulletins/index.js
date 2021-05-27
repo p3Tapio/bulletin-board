@@ -22,7 +22,7 @@ const Bulletins = () => {
   return (
     <>
       <div className="centercenter">
-        <div className="headerCard">
+        <div className="headerCard" id="headerCard">
           <Text type="headline-4">Bulletin board</Text>
           <Text type="body-1">
             This will be where you can see the bulletins and perhaps filter them with category etc.
@@ -31,7 +31,7 @@ const Bulletins = () => {
         <br />
       </div>
       <br />
-      <form style={{ backgroundColor: 'pink' }}>
+      <form>
         {bulletins
           .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
           .map((b, i) => (

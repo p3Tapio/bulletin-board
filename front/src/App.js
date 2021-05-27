@@ -9,9 +9,9 @@ import Bulletins from './components/bulletins';
 import Authorization from './components/user/auth';
 import Home from './components/Home';
 import Userpage from './components/user/Userpage';
-
 import PrivateRoute from './state/PrivateRoute';
 import Navbar from './components/navbar/Navbar';
+import NotFound from './NotFound';
 import { getBulletins, bulletinCreated } from './state/actions/bulletinActions';
 
 const App = () => {
@@ -19,7 +19,7 @@ const App = () => {
   const userError = useSelector((x) => x.userState.error);
   const bulletinsError = useSelector((x) => x.bulletinsState.error);
   const addMessage = useAddMessage();
-
+  // TODO -- jotain klappia päivittymisessä stateen (ilmenee jos ei kirjaantuneen priva-sivulla ja normissa joo [vai toisin päin])
   bulletinService.on('created', (response) => dispatch(bulletinCreated(response)));
 
   useEffect(() => {
@@ -44,6 +44,7 @@ const App = () => {
           <Route path="/bulletins" component={Bulletins} />
           <Route path="/auth" component={Authorization} />
           <PrivateRoute path="/userpage" component={Userpage} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     </>

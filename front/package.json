@@ -24,15 +24,16 @@
     "react-scripts": "4.0.3",
     "redux": "^4.1.0",
     "redux-thunk": "^2.3.0",
+    "rimraf": "^3.0.2",
     "socket.io-client": "^2.4.0",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.9"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "build": "rimraf build&&react-scripts build",
+    "deploy":"cd ../back&& git add -A && git commit -m \"rebuild\" && git push heroku master",
+    "build:deploy": "npm run build&&rmdir ..\\back\\src\\public\\ \/s\/q&&xcopy build ..\\back\\src\\public\\ \/s\/q\/y\/f&&npm run deploy"
   },
   "eslintConfig": {
     "extends": [

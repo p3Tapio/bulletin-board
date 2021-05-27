@@ -1,5 +1,3 @@
-const path = require('path');
-const favicon = require('serve-favicon');
 const compress = require('compression');
 const helmet = require('helmet');
 const cors = require('cors');
@@ -22,6 +20,7 @@ const app = express(feathers());
 
 // Load app configuration
 app.configure(configuration());
+
 // Enable security, CORS, compression, favicon and body parsing
 app.use(
   helmet({
@@ -32,9 +31,13 @@ app.use(cors());
 app.use(compress());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
+// app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 // Host the public folder ( TODO HUOM PROD 404t)
-app.use('/', express.static(app.get('public')));
+// app.use('/', express.static(app.get('public')));
+app.use(express.static(__dirname + '/public'));
+app.get('*', function (_req, res) {
+  res.sendFile(__dirname + '/public/index.html');
+});
 
 // Set up Plugins and providers
 app.configure(socketio());
