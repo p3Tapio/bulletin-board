@@ -11,8 +11,9 @@ body {
   display: flex;
   flex-wrap: wrap;
   margin: auto;
-  overflow: auto;
+  overflow: hidden;
   align-items: flex-start;
+  height: 100%;
   box-shadow: -3px 4px 13px -5px rgba(93, 90, 108, 0.75);
   -webkit-box-shadow: 0px 4px 13px -7px rgba(93, 90, 108, 0.75);
   -moz-box-shadow: -3px 4px 13px -5px rgba(93, 90, 108, 0.75);

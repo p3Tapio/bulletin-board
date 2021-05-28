@@ -7,27 +7,22 @@ const host = process.env.REACT_APP_API_URL;
 
 const feathersClient = feathers();
 
-const connect = () => {
-  const socket = io(host, {
-    transports: ['websocket'],
-    forceNew: true,
-  });
+const socket = io(host, {
+  transports: ['websocket'],
+  forceNew: true,
+});
 
-  feathersClient.configure(socketio(socket));
-  feathersClient.configure(
-    auth({
-      // eslint-disable-next-line no-undef
-      storage: window.localStorage,
-      storageKey: 'accessToken',
-    }),
-    {
-      timeout: 5000,
-    }
-  );
-};
-
-connect();
-// feathersClient.on('logout', connect());
+feathersClient.configure(socketio(socket));
+feathersClient.configure(
+  auth({
+    // eslint-disable-next-line no-undef
+    storage: window.localStorage,
+    storageKey: 'accessToken',
+  }),
+  {
+    timeout: 5000,
+  }
+);
 
 export const userService = feathersClient.service('users');
 export const bulletinService = feathersClient.service('bulletins');

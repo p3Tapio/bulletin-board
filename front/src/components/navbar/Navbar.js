@@ -30,13 +30,14 @@ const appBarActionStyle = {
 const Navbar = () => {
   const user = useSelector((x) => x.userState.userData);
   const dispatch = useDispatch();
-  // const history = useHistory();
+  const history = useHistory();
 
   const handleLogout = () => {
     dispatch(clearLoginState());
-    // TODO tämä koska en keksi miten yhteys ylläpidetään logoutin jälkeen. Socketti lopettaa siis toiminnan.
-    window.location.reload();
-    // history.push('/');
+    // TODO location.reload() ---> jos yhteys ei säily logoutin jälkeen. Socketti lopettaa välillä siis toiminnan.
+    // eslint-disable-next-line no-undef
+    // window.location.reload();
+    history.push('/');
   };
 
   return (

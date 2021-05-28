@@ -33,7 +33,6 @@ app.get('*', function (_req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
 
-// Set up Plugins and providers
 app.configure(socketio());
 app.configure(mongoose);
 app.configure(services);
