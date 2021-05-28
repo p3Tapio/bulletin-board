@@ -30,11 +30,13 @@ const appBarActionStyle = {
 const Navbar = () => {
   const user = useSelector((x) => x.userState.userData);
   const dispatch = useDispatch();
-  const history = useHistory();
+  // const history = useHistory();
 
   const handleLogout = () => {
     dispatch(clearLoginState());
-    history.push('/');
+    // TODO tämä koska en keksi miten yhteys ylläpidetään logoutin jälkeen. Socketti lopettaa siis toiminnan.
+    window.location.reload();
+    // history.push('/');
   };
 
   return (

@@ -31,6 +31,7 @@ const App = () => {
     if (userError || bulletinsError) {
       const error = userError || bulletinsError;
       addMessage({ action: 'Close', children: error });
+      // TODO if ???
       dispatch(clearLoginState());
     }
   }, [addMessage, bulletinsError, dispatch, userError]);
