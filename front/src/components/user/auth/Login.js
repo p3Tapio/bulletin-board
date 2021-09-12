@@ -4,31 +4,44 @@ import PropTypes from 'prop-types';
 import { Text } from '@react-md/typography';
 import { Button } from '@react-md/button';
 import { Form } from '@react-md/form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Loading from '../../common/Loading';
 import FormTextField from '../../form/FormTextField';
 import { loginValidation } from './validations';
 import { clearLoginState } from '../../../state/actions/userActions';
 
 const initialValues = { username: '', password: '' };
 
-const Login = ({ onSubmit, setShowRegister }) => (
-  <div className="authCard">
-    <Text type="headline-4">Login</Text>
-    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={loginValidation}>
-      {({ handleSubmit, resetForm, values }) => (
-        <LoginForm
-          onSubmit={handleSubmit}
-          resetForm={resetForm}
-          values={values}
-          setShowRegister={setShowRegister}
-        />
+const Login = ({ onSubmit, setShowRegister }) => {
+  const userState = useSelector((x) => x.userState);
+  return (
+    <div className="authCard">
+      <Text type="headline-4">Login</Text>
+      {userState.loading ? (
+        <div className="centercenter" style={{ height: '256px' }}>
+          <Loading size="165px" id="user" />
+        </div>
+      ) : (
+        <Formik
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          validationSchema={loginValidation}
+        >
+          {({ handleSubmit, resetForm, values }) => (
+            <LoginForm
+              onSubmit={handleSubmit}
+              resetForm={resetForm}
+              values={values}
+              setShowRegister={setShowRegister}
+            />
+          )}
+        </Formik>
       )}
-    </Formik>
-  </div>
-);
+    </div>
+  );
+};
 const LoginForm = ({ onSubmit, resetForm, values, setShowRegister }) => {
   const dispatch = useDispatch();
-
   const handleReset = () => {
     resetForm();
     dispatch(clearLoginState());

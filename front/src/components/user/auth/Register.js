@@ -6,6 +6,7 @@ import { Button } from '@react-md/button';
 import { Form } from '@react-md/form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAddMessage } from '@react-md/alert';
+import Loading from '../../common/Loading';
 import FormTextField from '../../form/FormTextField';
 import { registerValidation } from './validations';
 import { clearLoginState } from '../../../state/actions/userActions';
@@ -16,21 +17,34 @@ const initialValues = {
   passwordConfirm: '',
 };
 
-const Register = ({ onSubmit, setShowRegister }) => (
-  <div className="authCard">
-    <Text type="headline-4">Register</Text>
-    <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={registerValidation}>
-      {({ handleSubmit, resetForm, values }) => (
-        <RegisterForm
-          onSubmit={handleSubmit}
-          resetForm={resetForm}
-          values={values}
-          setShowRegister={setShowRegister}
-        />
+const Register = ({ onSubmit, setShowRegister }) => {
+  const userState = useSelector((x) => x.userState);
+  return (
+    <div className="authCard">
+      <Text type="headline-4">Register</Text>
+      {userState.loading ? (
+        <div className="centercenter" style={{ height: '353px' }}>
+          <Loading size="165px" id="user" />
+        </div>
+      ) : (
+        <Formik
+          initialValues={initialValues}
+          onSubmit={onSubmit}
+          validationSchema={registerValidation}
+        >
+          {({ handleSubmit, resetForm, values }) => (
+            <RegisterForm
+              onSubmit={handleSubmit}
+              resetForm={resetForm}
+              values={values}
+              setShowRegister={setShowRegister}
+            />
+          )}
+        </Formik>
       )}
-    </Formik>
-  </div>
-);
+    </div>
+  );
+};
 
 const RegisterForm = ({ onSubmit, resetForm, values, setShowRegister }) => {
   const dispatch = useDispatch();
@@ -85,11 +99,11 @@ const RegisterForm = ({ onSubmit, resetForm, values, setShowRegister }) => {
     </Form>
   );
 };
+
 Register.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   setShowRegister: PropTypes.func.isRequired,
 };
-
 RegisterForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   resetForm: PropTypes.func.isRequired,

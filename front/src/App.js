@@ -19,7 +19,7 @@ const App = () => {
   const userError = useSelector((x) => x.userState.error);
   const bulletinsError = useSelector((x) => x.bulletinsState.error);
   const addMessage = useAddMessage();
-  // TODO -- jotain klappia päivittymisessä stateen (ilmenee jos ei kirjaantuneen priva-sivulla ja normissa joo [vai toisin päin])
+
   bulletinService.on('created', (response) => dispatch(bulletinCreated(response)));
 
   useEffect(() => {
@@ -31,8 +31,7 @@ const App = () => {
     if (userError || bulletinsError) {
       const error = userError || bulletinsError;
       addMessage({ action: 'Close', children: error });
-      // TODO if ???
-      dispatch(clearLoginState());
+      if (userError) dispatch(clearLoginState());
     }
   }, [addMessage, bulletinsError, dispatch, userError]);
 

@@ -1,0 +1,27 @@
+.loading {
+  border-radius: 50%;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;     
+}
+@keyframes spin {
+  0% {transform: rotate(0deg); }
+  100%  {transform: rotate(360deg); }
+
+}
+@-moz-keyframes spin {
+  from {transform: rotate(0deg); }
+  to  {transform: rotate(360deg); }
+  
+}
+@-webkit-keyframes spin {
+  from {transform: rotate(0deg); }
+  to  {transform: rotate(360deg); }
+}
+#bulletins {
+  border: 3vw solid #cedadb;
+  border-top: 3vw solid #e8f1f2;
+}
+#user {
+  border: 30px solid #e8f1f2;
+  border-top: 30px solid #ffffff;
+}
