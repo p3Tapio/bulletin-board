@@ -16,32 +16,7 @@ module.exports = {
 
   after: {
     all: [
-      // Make sure the password field is never sent to the client
-      // Always must be the last hook
       protect('password'),
     ],
-    find: [],
-    get: [],
-    create: [
-      // LOGGAA SISÄÄN MUTTA: autentikaatio epäonnistuu uutta bulletinia luodessa
-      // async (context) => {
-      //   const userData = {
-      //     username: context.data.username,
-      //     password: context.data.passwordConfirm,
-      //     strategy: 'local',
-      //   };
-      //   context.dispatch = await context.app
-      //     .service('authentication')
-      //     .create(userData, context.result);
-      //   delete context.dispatch.user.password;
-      // },
-    ],
-  },
-  error: {
-    all: [
-      (context) => {
-        console.log(context.error);
-      },
-    ],
-  },
+  }
 };

@@ -1,0 +1,3 @@
+# Bulletin board
+Trying out FeathersJS, sockets etc.
+...

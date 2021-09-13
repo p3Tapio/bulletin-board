@@ -3,17 +3,12 @@ const decode = require('jwt-decode');
 
 module.exports = {
   before: {
-    all: [],
-    find: [],
-    get: [],
     create: [authenticate('jwt')],
     update: [authenticate('jwt')],
     patch: [authenticate('jwt')],
     remove: [authenticate('jwt')],
   },
-
   after: {
-    all: [],
     find: [
       async (context) => {
         const bulletModel = context.app.service('bulletins').Model;
@@ -24,7 +19,6 @@ module.exports = {
         return context;
       },
     ],
-    get: [],
     create: [
       async (context) => {
         const UserModel = context.app.service('users').Model;
@@ -45,18 +39,5 @@ module.exports = {
         return context;
       },
     ],
-    update: [],
-    patch: [],
-    remove: [],
-  },
-
-  error: {
-    all: [],
-    find: [],
-    get: [],
-    create: [],
-    update: [],
-    patch: [],
-    remove: [],
   },
 };
