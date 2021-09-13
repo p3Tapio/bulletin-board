@@ -74,7 +74,13 @@ const LoginForm = ({ onSubmit, resetForm, values, setShowRegister }) => {
           >
             reset
           </Button>
-          <Button type="submit" onClick={onSubmit} themeType="contained" style={{ margin: '2px' }}>
+          <Button
+            id="submit"
+            type="submit"
+            onClick={onSubmit}
+            themeType="contained"
+            style={{ margin: '2px' }}
+          >
             submit
           </Button>
         </div>

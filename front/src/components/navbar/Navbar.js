@@ -72,7 +72,7 @@ const Navbar = () => {
             <AppBarAction style={{ ...appBarActionStyle, marginLeft: 'auto', width: 110 }}>
               <span onClick={() => handleLogout()} style={linkStyle} aria-hidden="true">
                 <AiOutlineRight size={22} style={{ marginBottom: '5px', marginRight: '5px' }} />
-                <Text type="button" component="p" style={{ marginRight: '5px' }}>
+                <Text id="logoutBtn" type="button" component="p" style={{ marginRight: '5px' }}>
                   logout
                 </Text>
               </span>
@@ -83,7 +83,7 @@ const Navbar = () => {
             <AppBarAction style={{ ...appBarActionStyle, width: 110 }}>
               <Link to={{ pathname: '/auth', state: { showRegister: false } }} style={linkStyle}>
                 <AiOutlineKey size={22} style={{ marginBottom: '5px', marginRight: '5px' }} />
-                <Text type="button" component="p" style={{ marginRight: '5px' }}>
+                <Text id="loginBtn" type="button" component="p" style={{ marginRight: '5px' }}>
                   login
                 </Text>
               </Link>
