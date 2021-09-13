@@ -33,7 +33,9 @@
     "start": "react-scripts start",
     "build": "rimraf build&&react-scripts build",
     "deploy":"cd ../back&& git add -A && git commit -m \"rebuild\" && git push heroku master",
-    "build:deploy": "npm run build&&rmdir ..\\back\\src\\public\\ \/s\/q&&xcopy build ..\\back\\src\\public\\ \/s\/q\/y\/f&&npm run deploy"
+    "build:deploy": "npm run build&&rmdir ..\\back\\src\\public\\ \/s\/q&&xcopy build ..\\back\\src\\public\\ \/s\/q\/y\/f&&npm run deploy",
+    "cypress:open": "cypress open",
+    "test:cypress": "concurrently \"cd ../back&&npm run start:test\" \"npm start\" \"npm run cypress:open\""
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +56,8 @@
     ]
   },
   "devDependencies": {
+    "concurrently": "^6.2.1",
+    "cypress": "^8.3.1",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.3.0",

@@ -57,6 +57,7 @@ const LoginForm = ({ onSubmit, resetForm, values, setShowRegister }) => {
           <small>Don&#39;t have an account?</small>
           <br />
           <small
+            id="registerBtn"
             style={{ cursor: 'pointer' }}
             aria-hidden="true"
             onClick={() => setShowRegister(true)}

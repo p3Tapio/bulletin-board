@@ -61,9 +61,22 @@ const RegisterForm = ({ onSubmit, resetForm, values, setShowRegister }) => {
   return (
     <Form>
       <div className="authInputWrap">
-        <FormTextField name="username" label="Username" type="text" value={values.username} />
-        <FormTextField name="password" label="Password" type="password" value={values.password} />
         <FormTextField
+          id="username"
+          name="username"
+          label="Username"
+          type="text"
+          value={values.username}
+        />
+        <FormTextField
+          id="password"
+          name="password"
+          label="Password"
+          type="password"
+          value={values.password}
+        />
+        <FormTextField
+          id="passwordConfirm"
           name="passwordConfirm"
           label="Password confirmation"
           type="password"
@@ -91,7 +104,13 @@ const RegisterForm = ({ onSubmit, resetForm, values, setShowRegister }) => {
           >
             reset
           </Button>
-          <Button type="submit" onClick={onSubmit} themeType="contained" style={{ margin: '2px' }}>
+          <Button
+            id="submit"
+            type="submit"
+            onClick={onSubmit}
+            themeType="contained"
+            style={{ margin: '2px' }}
+          >
             submit
           </Button>
         </div>

@@ -13,5 +13,6 @@ server.on('listening', () =>
     'Feathers application started on http://%s:%d',
     app.get('host'),
     port
-  )
+  ),
+logger.info('MongoDB %s', app.get('mongodb'))
 );

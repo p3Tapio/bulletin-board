@@ -14,6 +14,7 @@ const channels = require('./channels');
 
 const mongoose = require('./mongoose');
 const dotenv = require('dotenv');
+
 dotenv.config();
 
 const app = express(feathers());
@@ -41,5 +42,13 @@ app.configure(channels);
 app.use(express.errorHandler({ logger }));
 
 app.hooks(appHooks);
+
+if(process.env.NODE_ENV === 'test') {
+  const reset = async () => {
+    await app.service('users').Model.deleteMany({});
+    await app.service('bulletins').Model.deleteMany({});
+  };
+  reset();
+}
 
 module.exports = app;

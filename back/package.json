@@ -28,7 +28,8 @@
     "lint": "eslint src/. test/. --config .eslintrc.json --fix",
     "dev": "nodemon src/",
     "start": "node src/",
-    "jest": "jest  --forceExit"
+    "jest": "jest  --forceExit",
+    "start:test": "cross-env NODE_ENV=test nodemon src/"
   },
   "standard": {
     "env": [
