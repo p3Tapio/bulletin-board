@@ -43,7 +43,6 @@ body {
 .authInputWrap {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 .authFormInput {
   width: 100%;
@@ -74,6 +73,14 @@ body {
   box-shadow: -7px 10px 16px -3px rgba(0, 0, 0, 0.22);
   -webkit-box-shadow: -7px 10px 16px -3px rgba(0, 0, 0, 0.22);
   -moz-box-shadow: -7px 10px 16px -3px rgba(0, 0, 0, 0.22);
+}
+.fileInputWrap {
+  display: flex;
+  justify-content: flex-start;
+}
+.bulletBtnWrap {
+  display: flex;
+  justify-content: flex-end;
 }
 /* -------- ACCODION ----------------- */
 .accordionWrap {

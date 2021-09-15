@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text } from '@react-md/typography';
 import { Formik } from 'formik';
-import { Form } from '@react-md/form';
+import { Form, FileInput } from '@react-md/form';
 import { Button } from '@react-md/button';
 import PropTypes from 'prop-types';
 import * as yup from 'yup';
@@ -24,7 +24,7 @@ const bulletValidation = yup.object({
   category: yup.string().required('Please select category'),
 });
 
-const NewBulletin = ({ onSubmit }) => {
+const NewBulletin = ({ onSubmit, handleUpload }) => {
   return (
     <div className="newBulletinCard">
       <Text type="headline-4" style={{ marginTop: '10px' }}>
@@ -32,14 +32,19 @@ const NewBulletin = ({ onSubmit }) => {
       </Text>
       <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={bulletValidation}>
         {({ handleSubmit, resetForm, values }) => (
-          <BulletForm onSubmit={handleSubmit} resetForm={resetForm} values={values} />
+          <BulletForm
+            onSubmit={handleSubmit}
+            resetForm={resetForm}
+            values={values}
+            handleUpload={handleUpload}
+          />
         )}
       </Formik>
     </div>
   );
 };
 
-const BulletForm = ({ onSubmit, resetForm, values }) => {
+const BulletForm = ({ onSubmit, resetForm, values, handleUpload }) => {
   const handleReset = () => {
     resetForm();
   };
@@ -56,6 +61,17 @@ const BulletForm = ({ onSubmit, resetForm, values }) => {
           value={values.description}
         />
         <FormSelect name="category" label="Category" options="bulletinOptions" />
+        <div className="fileInputWrap">
+          <FileInput
+            id="uploadImg"
+            theme="clear"
+            themeType="outline"
+            buttonType="text"
+            onChange={handleUpload}
+          >
+            Add an image
+          </FileInput>
+        </div>
       </div>
       <div className="bulletBtnWrap">
         <Button
@@ -76,10 +92,12 @@ const BulletForm = ({ onSubmit, resetForm, values }) => {
 
 NewBulletin.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  handleUpload: PropTypes.func.isRequired,
 };
 BulletForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   resetForm: PropTypes.func.isRequired,
   values: PropTypes.instanceOf(Object).isRequired,
+  handleUpload: PropTypes.func.isRequired,
 };
 export default NewBulletin;
