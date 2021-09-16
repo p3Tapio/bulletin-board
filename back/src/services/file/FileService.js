@@ -2,34 +2,35 @@ const aws = require('aws-sdk');
 
 module.exports = class FileService {
   constructor(app) {
-    this.region = app.get('awsregion');
-    this.bucket = app.get('bucket');
-    this.accessKey = process.env.AWSAccessKeyId;
-    this.secretKey = process.env.AWSSecretKey;
+    this.region = app.get('AWSRegion');
+    this.bucket = app.get('S3Bucket');
+    this.accessKey = app.get('AWSAccessKey');
+    this.secretKey = app.get('AWSSecretKey');
   }
-  create(_id, params) {
-    const s3 = new aws.S3();
-    const filename = params.file.filename; //uuid?
-    const filetype = params.file.filetype;
+  async create(data) {
+    try {
+      const s3 = new aws.S3({
+        region: this.region,
+        accessKeyId: this.accessKey,
+        secretAccessKey: this.secretKey,
+      });
+      const filename = data.name; //uuid?
+      const filetype = data.type;
 
-    const s3Params = {
-      Bucket: this.bucket,
-      Key: filename,
-      Expires: 500,
-      ContentType: filetype,
-      ACL: 'public-read',
-    };
+      const s3Params = {
+        Bucket: this.bucket,
+        Key: filename,
+        Expires: 500,
+        ContentType: `image/${filetype}`,
+      };
+      const signedUrl = await s3.getSignedUrl('putObject', s3Params); 
+      return {
+        signedUrl: signedUrl, 
+        url: `https://${this.bucket}.s3.amazonaws.com/${filename}`
+      };
 
-    s3.getSignedUrl('putObject', s3Params, (err, data) => {
-      if (err) {
-        console.log(`AWS Error: ${err}`);
-        return err;
-      } else {
-        return {
-          signedRequest: data,
-          url: `https://${this.bucket}.s3.amazonaws.com/${filename}`,
-        };
-      }
-    });
+    } catch(error) {
+      return { error };
+    }
   }
 };
