@@ -26,5 +26,6 @@ feathersClient.configure(
 
 export const userService = feathersClient.service('users');
 export const bulletinService = feathersClient.service('bulletins');
+export const fileService = feathersClient.service('file');
 
 export default feathersClient;
