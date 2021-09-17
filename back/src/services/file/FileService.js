@@ -1,4 +1,5 @@
 const aws = require('aws-sdk');
+const { v4: uuidv4 } = require('uuid');
 
 module.exports = class FileService {
   constructor(app) {
@@ -14,13 +15,14 @@ module.exports = class FileService {
         accessKeyId: this.accessKey,
         secretAccessKey: this.secretKey,
       });
-      const filename = data.name; //uuid?
+      const filename = uuidv4();
       const filetype = data.type;
 
       const s3Params = {
         Bucket: this.bucket,
         Key: filename,
         Expires: 500,
+        ACL:'public-read',
         ContentType: `image/${filetype}`,
       };
       const signedUrl = await s3.getSignedUrl('putObject', s3Params); 

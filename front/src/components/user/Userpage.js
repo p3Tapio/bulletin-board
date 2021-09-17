@@ -7,7 +7,7 @@ import BulletinDialog from './newBulletin';
 const Userpage = () => {
   const user = useSelector((x) => x.userState.userData.user);
   const [showDialog, setShowDialog] = useState(false);
-  //if(!user..) return null;
+  // if(!user..) return null;
   return (
     <div className="centercenter">
       <div className="headerCard">

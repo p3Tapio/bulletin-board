@@ -68,8 +68,6 @@ const userReducer = (state = initialState, action) => {
       return { ...state, error: action.payload, loading: false };
     case CLEAR_LOGIN_STATE:
       clearLocalStorage();
-      // "calls the remove method of the authentication service"
-      // ei ilmeisesti merkitystä JWT:n kohdalla, paitsi jos session hallinta tms
       feathersClient.logout();
       return { userData: {}, loading: false, error: '' };
     case UPDATE_BULLETINS:

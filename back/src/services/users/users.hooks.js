@@ -15,8 +15,16 @@ module.exports = {
   },
 
   after: {
-    all: [
-      protect('password'),
+    all: [protect('password')],
+  },
+  error: {
+    create: [
+      (context) => {
+        if (context.error.errors.username) {
+          context.error.message =
+            context.error.errors.username.properties.message;
+        }
+      },
     ],
-  }
+  },
 };

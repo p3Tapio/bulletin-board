@@ -5,7 +5,6 @@ import { Text } from '@react-md/typography';
 import { Button } from '@react-md/button';
 import { Form } from '@react-md/form';
 import { useDispatch, useSelector } from 'react-redux';
-import { useAddMessage } from '@react-md/alert';
 import Loading from '../../common/Loading';
 import FormTextField from '../../form/FormTextField';
 import { registerValidation } from './validations';
@@ -48,12 +47,6 @@ const Register = ({ onSubmit, setShowRegister }) => {
 
 const RegisterForm = ({ onSubmit, resetForm, values, setShowRegister }) => {
   const dispatch = useDispatch();
-  const error = useSelector((x) => x.userState.error);
-  const addMessage = useAddMessage();
-  if (error) {
-    addMessage({ action: 'Close', children: error });
-    dispatch(clearLoginState());
-  }
   const handleReset = () => {
     resetForm();
     dispatch(clearLoginState());

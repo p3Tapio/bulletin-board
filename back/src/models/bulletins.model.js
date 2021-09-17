@@ -15,7 +15,15 @@ module.exports = function (app) {
         minlength: 20,
         maxlength: 250,
       },
-      category: { type: String, required: true },
+      category: {
+        type: String,
+        enum: ['forSale', 'housing', 'jobs', 'services'],
+        required: true,
+      },
+      image: {
+        url: { type: String },
+        name: { type: String },
+      },
       user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     },
     {
