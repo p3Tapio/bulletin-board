@@ -16,10 +16,10 @@ const useBulletin = () => {
       dispatch(updateUserBulletins(res));
       setShowDialog(false);
     } catch (err) {
+      // tämän pitäisi olla dispatch?
       addMessage({ action: 'Close', children: `Error: ${err.message}` });
     }
   };
-
   return { createBulletin };
 };
 export default useBulletin;
