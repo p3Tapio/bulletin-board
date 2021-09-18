@@ -3,11 +3,11 @@ import { fileService } from '../client';
 
 const useImage = () => {
   // dispatch loading?
-  const uploadImage = async (ev) => {
-    const [upload] = Array.from(ev.currentTarget.files || [null]);
+  const uploadImage = async (upload) => {
     try {
-      if (upload && upload.name) {
-        const parts = upload.name.split('.');
+      const [file] = upload;
+      if (file && file.name) {
+        const parts = file.name.split('.');
         const type = parts[parts.length - 1];
         if (type !== 'jpeg' && type !== 'jpg' && type !== 'png') {
           return { error: 'Wrong file format' };
@@ -16,8 +16,8 @@ const useImage = () => {
         const options = {
           headers: { 'Content-Type': `image/${type}`, 'x-amz-acl': 'public-read' },
         };
-        await axios.put(uploadDetails.signedUrl, upload, options);
-        return { url: uploadDetails.url, name: upload.name };
+        await axios.put(uploadDetails.signedUrl, file, options);
+        return { url: uploadDetails.url, name: file.name };
       }
       return { error: 'Upload error' };
     } catch (err) {

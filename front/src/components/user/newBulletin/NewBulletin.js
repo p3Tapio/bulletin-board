@@ -1,13 +1,14 @@
 import React from 'react';
 import { Text } from '@react-md/typography';
 import { Formik } from 'formik';
-import { Form, FileInput } from '@react-md/form';
+import { Form } from '@react-md/form';
 import { Button } from '@react-md/button';
 import PropTypes from 'prop-types';
 import * as yup from 'yup';
 import FormTextField from '../../form/FormTextField';
 import FormTextArea from '../../form/FormTextArea';
 import FormSelect from '../../form/FormSelect';
+import FormFileInput from '../../form/FormFileInput';
 
 const initialValues = { header: '', description: '', category: '' };
 const bulletValidation = yup.object({
@@ -24,7 +25,7 @@ const bulletValidation = yup.object({
   category: yup.string().required('Please select category'),
 });
 
-const NewBulletin = ({ onSubmit, handleUpload }) => {
+const NewBulletin = ({ onSubmit, handleUpload, uploadResult }) => {
   return (
     <div className="newBulletinCard">
       <Text type="headline-4" style={{ marginTop: '10px' }}>
@@ -37,6 +38,7 @@ const NewBulletin = ({ onSubmit, handleUpload }) => {
             resetForm={resetForm}
             values={values}
             handleUpload={handleUpload}
+            uploadResult={uploadResult}
           />
         )}
       </Formik>
@@ -44,7 +46,7 @@ const NewBulletin = ({ onSubmit, handleUpload }) => {
   );
 };
 
-const BulletForm = ({ onSubmit, resetForm, values, handleUpload }) => {
+const BulletForm = ({ onSubmit, resetForm, values, handleUpload, uploadResult }) => {
   const handleReset = () => {
     resetForm();
   };
@@ -62,15 +64,7 @@ const BulletForm = ({ onSubmit, resetForm, values, handleUpload }) => {
         />
         <FormSelect name="category" label="Category" options="bulletinOptions" />
         <div className="fileInputWrap">
-          <FileInput
-            id="uploadImg"
-            theme="clear"
-            themeType="outline"
-            buttonType="text"
-            onChange={handleUpload}
-          >
-            Add an image
-          </FileInput>
+          <FormFileInput handleUpload={handleUpload} uploadResult={uploadResult} />
         </div>
       </div>
       <div className="bulletBtnWrap">
@@ -93,11 +87,17 @@ const BulletForm = ({ onSubmit, resetForm, values, handleUpload }) => {
 NewBulletin.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   handleUpload: PropTypes.func.isRequired,
+  uploadResult: PropTypes.string,
 };
+NewBulletin.defaultProps = { uploadResult: '' };
+
 BulletForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   resetForm: PropTypes.func.isRequired,
   values: PropTypes.instanceOf(Object).isRequired,
   handleUpload: PropTypes.func.isRequired,
+  uploadResult: PropTypes.string,
 };
+BulletForm.defaultProps = { uploadResult: '' };
+
 export default NewBulletin;
