@@ -1,7 +1,9 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useDropzone } from 'react-dropzone';
 import PropTypes from 'prop-types';
+import { baseStyle, activeStyle, errorStyle } from './FileInputStyles';
 
 const FormFileInput = ({ handleUpload, uploadResult }) => {
   const onDrop = useCallback(
@@ -10,29 +12,52 @@ const FormFileInput = ({ handleUpload, uploadResult }) => {
     },
     [handleUpload]
   );
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+  const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({
+    onDrop,
+    accept: 'image/jpeg, image/png, image/jpg',
+  });
+  const style = useMemo(
+    () => ({
+      ...baseStyle,
+      ...(isDragActive ? activeStyle : {}),
+      ...(isDragReject ? errorStyle : {}),
+    }),
+    [isDragActive, isDragReject]
+  );
   return (
     <div className="dropzoneWrap">
-      <div {...getRootProps()} className="dropzone">
+      <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
         {isDragActive ? (
-          <p>Drop your image here!</p>
+          isDragReject ? (
+            <p>Wrong file type</p>
+          ) : (
+            <p>Now drop your image here!</p>
+          )
         ) : (
-          <p>Add and image by dropping it here or click to select a file</p>
+          <p>Add an image by dropping it here, or click to select a file</p>
         )}
       </div>
       <ShowResult result={uploadResult} />
     </div>
   );
 };
-const ShowResult = ({ result }) => <p>{result}</p>;
+const ShowResult = ({ result }) => {
+  return <p>{result.error || result.name}</p>;
+};
 
 FormFileInput.propTypes = {
   handleUpload: PropTypes.func.isRequired,
-  uploadResult: PropTypes.string,
+  uploadResult: PropTypes.shape({
+    name: PropTypes.string,
+    error: PropTypes.string,
+  }).isRequired,
 };
-FormFileInput.defaultProps = { uploadResult: '' };
-ShowResult.propTypes = { result: PropTypes.string };
-ShowResult.defaultProps = { result: '' };
+ShowResult.propTypes = {
+  result: PropTypes.shape({
+    name: PropTypes.string,
+    error: PropTypes.string,
+  }).isRequired,
+};
 
 export default FormFileInput;

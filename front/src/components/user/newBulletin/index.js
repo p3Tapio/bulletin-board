@@ -10,7 +10,7 @@ import useImage from '../../../hooks/useImage';
 
 const BulletinDialog = ({ showDialog, setShowDialog }) => {
   const [image, setImage] = useState({ url: '', name: '' });
-  const [uploadResult, setUploadResult] = useState();
+  const [uploadResult, setUploadResult] = useState({});
   const { createBulletin } = useBulletin();
   const { uploadImage } = useImage();
 
@@ -22,9 +22,9 @@ const BulletinDialog = ({ showDialog, setShowDialog }) => {
     const result = await uploadImage(ev);
     if (!result.error) {
       setImage({ url: result.url, name: result.name });
-      setUploadResult(result.name);
+      setUploadResult(result);
     } else if (result.error) {
-      setUploadResult(result.error);
+      setUploadResult(result);
     }
   };
 

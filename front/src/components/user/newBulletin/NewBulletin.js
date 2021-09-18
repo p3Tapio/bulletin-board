@@ -87,17 +87,20 @@ const BulletForm = ({ onSubmit, resetForm, values, handleUpload, uploadResult })
 NewBulletin.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   handleUpload: PropTypes.func.isRequired,
-  uploadResult: PropTypes.string,
+  uploadResult: PropTypes.shape({
+    name: PropTypes.string,
+    error: PropTypes.string,
+  }).isRequired,
 };
-NewBulletin.defaultProps = { uploadResult: '' };
-
 BulletForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   resetForm: PropTypes.func.isRequired,
   values: PropTypes.instanceOf(Object).isRequired,
   handleUpload: PropTypes.func.isRequired,
-  uploadResult: PropTypes.string,
+  uploadResult: PropTypes.shape({
+    name: PropTypes.string,
+    error: PropTypes.string,
+  }).isRequired,
 };
-BulletForm.defaultProps = { uploadResult: '' };
 
 export default NewBulletin;
