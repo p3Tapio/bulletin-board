@@ -25,25 +25,53 @@ const FormFileInput = ({ handleUpload, uploadResult }) => {
     [isDragActive, isDragReject]
   );
   return (
-    <div className="dropzoneWrap">
-      <div {...getRootProps({ style })}>
-        <input {...getInputProps()} />
-        {isDragActive ? (
-          isDragReject ? (
-            <p>Wrong file type</p>
+    <>
+      <div>
+        <div {...getRootProps({ style })}>
+          <input {...getInputProps()} />
+          {isDragActive ? (
+            isDragReject ? (
+              <div>
+                <p style={{ marginLeft: '60px', marginBottom: '0px', marginTop: '-5px' }}>
+                  Wrong file type
+                </p>
+                <small style={{ fontStyle: 'italic' }}>
+                  (Only *.jpeg, *.jpg and *.png are accepted)
+                </small>
+              </div>
+            ) : (
+              <p>Now drop it!</p>
+            )
           ) : (
-            <p>Now drop your image here!</p>
-          )
-        ) : (
-          <p>Add an image by dropping it here, or click to select a file</p>
-        )}
+            <p>Add an image by dropping it here, or click to select a file</p>
+          )}
+        </div>
       </div>
-      <ShowResult result={uploadResult} />
-    </div>
+      <div>
+        <ShowResult result={uploadResult} />
+      </div>
+    </>
   );
 };
 const ShowResult = ({ result }) => {
-  return <p>{result.error || result.name}</p>;
+  let resultStyle;
+  if (result.error) {
+    resultStyle = 'img-upload-error';
+    // eslint-disable-next-line no-console
+    console.log('result.error', result.error);
+  } else if (result.name) {
+    resultStyle = 'img-upload-success';
+    // eslint-disable-next-line no-console
+    console.log('result.name', result.name);
+  }
+  return (
+    <>
+      {result.error ||
+        (result.name && (
+          <p className={resultStyle}>{result.error || `uploaded: ${result.name}`}</p>
+        ))}
+    </>
+  );
 };
 
 FormFileInput.propTypes = {

@@ -32,9 +32,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "dev": "concurrently \"cd ../back&&npm run dev\" \"npm start\"",
     "build": "rimraf build&&react-scripts build",
-    "deploy":"cd ../back&& git add -A && git commit -m \"rebuild\" && git push heroku master",
-    "build:deploy": "npm run build&&rmdir ..\\back\\src\\public\\ \/s\/q&&xcopy build ..\\back\\src\\public\\ \/s\/q\/y\/f&&npm run deploy",
+    "deploy": "cd ../back&& git add -A && git commit -m \"rebuild\" && git push heroku master",
+    "build:deploy": "npm run build&&rmdir ..\\back\\src\\public\\ /s/q&&xcopy build ..\\back\\src\\public\\ /s/q/y/f&&npm run deploy",
     "cypress:open": "cypress open",
     "test:cypress": "concurrently \"cd ../back&&npm run start:test\" \"npm start\" \"npm run cypress:open\""
   },

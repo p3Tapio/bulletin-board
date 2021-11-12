@@ -34,9 +34,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(clearLoginState());
-    // TODO location.reload() ---> jos yhteys ei säily logoutin jälkeen. Socketti lopettaa välillä siis toiminnan.
-    // eslint-disable-next-line no-undef
-    // window.location.reload();
+    // TODO lait location.reload() jos yhteys ei säily logoutin jälkeen.
     history.push('/');
   };
 
@@ -61,15 +59,16 @@ const Navbar = () => {
         </AppBarAction>
         {user && user.accessToken ? (
           <>
-            <AppBarAction style={{ ...appBarActionStyle, width: 130 }}>
+            <AppBarAction id="userpageWrap" style={{ ...appBarActionStyle }}>
               <Link to="/userpage" style={linkStyle}>
                 <AiOutlineSmile size={22} style={{ marginBottom: '5px', marginRight: '5px' }} />
-                <Text type="button" component="p" style={{ marginRight: '5px' }}>
+                <Text type="button" component="p">
                   userpage
                 </Text>
               </Link>
             </AppBarAction>
-            <AppBarAction style={{ ...appBarActionStyle, marginLeft: 'auto', width: 110 }}>
+            {/* fall left if window.width < x */}
+            <AppBarAction id="logoutBtnWrap" style={{ ...appBarActionStyle, width: 110 }}>
               <span onClick={() => handleLogout()} style={linkStyle} aria-hidden="true">
                 <AiOutlineRight size={22} style={{ marginBottom: '5px', marginRight: '5px' }} />
                 <Text id="logoutBtn" type="button" component="p" style={{ marginRight: '5px' }}>

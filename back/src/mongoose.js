@@ -4,7 +4,6 @@ const logger = require('./logger');
 module.exports = function (app) {
   mongoose
     .connect(app.get('mongodb'), {
-      useCreateIndex: true,
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
