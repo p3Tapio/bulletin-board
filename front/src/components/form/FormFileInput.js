@@ -1,20 +1,33 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import PropTypes from 'prop-types';
-import { baseStyle, activeStyle, errorStyle } from './FileInputStyles';
+import {
+  baseStyle,
+  activeStyle,
+  errorStyle,
+  thumbsContainer,
+  thumb,
+  thumbInner,
+  img,
+} from './FileInputStyles';
 
 const FormFileInput = ({ handleUpload, uploadResult }) => {
-  const onDrop = useCallback(
-    (file) => {
-      handleUpload(file);
-    },
-    [handleUpload]
-  );
+  const [files, setFiles] = useState([]);
+
   const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({
-    onDrop,
     accept: 'image/jpeg, image/png, image/jpg',
+    onDrop: (acceptedFiles) => {
+      setFiles(
+        acceptedFiles.map((file) =>
+          Object.assign(file, {
+            preview: URL.createObjectURL(file),
+          })
+        )
+      );
+      handleUpload(acceptedFiles);
+    },
   });
   const style = useMemo(
     () => ({
@@ -24,6 +37,7 @@ const FormFileInput = ({ handleUpload, uploadResult }) => {
     }),
     [isDragActive, isDragReject]
   );
+
   return (
     <>
       <div>
@@ -48,11 +62,34 @@ const FormFileInput = ({ handleUpload, uploadResult }) => {
         </div>
       </div>
       <div>
+        <Preview files={files} />
         <ShowResult result={uploadResult} />
       </div>
     </>
   );
 };
+const Preview = ({ files }) => {
+  useEffect(
+    () => () => {
+      files.forEach((file) => URL.revokeObjectURL(file.preview));
+    },
+    [files]
+  );
+
+  const thumbs = files.map((file) => (
+    <div style={thumb} key={file.name}>
+      <div style={thumbInner}>
+        <img src={file.preview} style={img} alt="img" />
+      </div>
+    </div>
+  ));
+  return (
+    <section className="container">
+      <aside style={thumbsContainer}>{thumbs}</aside>
+    </section>
+  );
+};
+
 const ShowResult = ({ result }) => {
   let resultStyle;
   if (result.error) {
@@ -73,7 +110,12 @@ const ShowResult = ({ result }) => {
     </>
   );
 };
-
+Preview.propTypes = {
+  files: PropTypes.instanceOf(Array),
+};
+Preview.defaultProps = {
+  files: [],
+};
 FormFileInput.propTypes = {
   handleUpload: PropTypes.func.isRequired,
   uploadResult: PropTypes.shape({
