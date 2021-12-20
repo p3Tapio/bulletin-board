@@ -25,7 +25,7 @@ const bulletValidation = yup.object({
   category: yup.string().required('Please select category'),
 });
 
-const NewBulletin = ({ onSubmit, handleUpload, uploadResult }) => {
+const NewBulletin = ({ onSubmit, handleUpload, handleRemove, uploadResult }) => {
   return (
     <div className="newBulletinCard">
       <Text type="headline-4" style={{ marginTop: '10px' }}>
@@ -38,6 +38,7 @@ const NewBulletin = ({ onSubmit, handleUpload, uploadResult }) => {
             resetForm={resetForm}
             values={values}
             handleUpload={handleUpload}
+            handleRemove={handleRemove}
             uploadResult={uploadResult}
           />
         )}
@@ -46,7 +47,7 @@ const NewBulletin = ({ onSubmit, handleUpload, uploadResult }) => {
   );
 };
 
-const BulletForm = ({ onSubmit, resetForm, values, handleUpload, uploadResult }) => {
+const BulletForm = ({ onSubmit, resetForm, values, handleUpload, handleRemove, uploadResult }) => {
   const handleReset = () => {
     resetForm();
   };
@@ -64,7 +65,11 @@ const BulletForm = ({ onSubmit, resetForm, values, handleUpload, uploadResult })
         />
         <FormSelect name="category" label="Category" options="bulletinOptions" />
         <div className="fileInputWrap">
-          <FormFileInput handleUpload={handleUpload} uploadResult={uploadResult} />
+          <FormFileInput
+            handleUpload={handleUpload}
+            handleRemove={handleRemove}
+            uploadResult={uploadResult}
+          />
         </div>
       </div>
       <div className="bulletBtnWrap">
@@ -87,6 +92,7 @@ const BulletForm = ({ onSubmit, resetForm, values, handleUpload, uploadResult })
 NewBulletin.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   handleUpload: PropTypes.func.isRequired,
+  handleRemove: PropTypes.func.isRequired,
   uploadResult: PropTypes.shape({
     name: PropTypes.string,
     error: PropTypes.string,
@@ -97,6 +103,7 @@ BulletForm.propTypes = {
   resetForm: PropTypes.func.isRequired,
   values: PropTypes.instanceOf(Object).isRequired,
   handleUpload: PropTypes.func.isRequired,
+  handleRemove: PropTypes.func.isRequired,
   uploadResult: PropTypes.shape({
     name: PropTypes.string,
     error: PropTypes.string,

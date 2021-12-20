@@ -50,3 +50,16 @@ export const img = {
   width: 'auto',
   height: '100%',
 };
+
+export const uploaded = {
+  display: 'flex',
+  alignItems: 'center',
+  height: '120px',
+  color: '#486466',
+  padding: '10px',
+  marginTop: '10px',
+  boxShadow: '-2px 2px 7px -1px #9bb2b4',
+  fontFamily:
+    '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif',
+  transition: 'box-shadow .05s ease-in',
+};

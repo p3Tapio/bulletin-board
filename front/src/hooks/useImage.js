@@ -17,14 +17,26 @@ const useImage = () => {
           headers: { 'Content-Type': `image/${type}`, 'x-amz-acl': 'public-read' },
         };
         await axios.put(uploadDetails.signedUrl, file, options);
-        return { url: uploadDetails.url, name: file.name };
+        return { url: uploadDetails.url, name: file.name, path: uploadDetails.filePath };
       }
       return { error: 'Upload error' };
     } catch (err) {
       return { error: err };
     }
   };
-  return { uploadImage };
+  const removeImage = async (image) => {
+    try {
+      if (image && image.path) {
+        const result = await fileService.remove({ path: image.path });
+        // TODO  if ok, else if not
+        return result;
+      }
+      return { error: 'Invalid params' };
+    } catch (err) {
+      return { error: err };
+    }
+  };
+  return { uploadImage, removeImage };
 };
 
 export default useImage;

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Dialog, DialogContent } from '@react-md/dialog';
@@ -9,10 +10,10 @@ import useBulletin from '../../../hooks/useBulletin';
 import useImage from '../../../hooks/useImage';
 
 const BulletinDialog = ({ showDialog, setShowDialog }) => {
-  const [image, setImage] = useState({ url: '', name: '' });
+  const [image, setImage] = useState({ url: '', name: '', path: '' });
   const [uploadResult, setUploadResult] = useState({});
   const { createBulletin } = useBulletin();
-  const { uploadImage } = useImage();
+  const { uploadImage, removeImage } = useImage();
 
   const handleSubmit = async (values) => {
     const data = { ...values, image };
@@ -21,11 +22,19 @@ const BulletinDialog = ({ showDialog, setShowDialog }) => {
   const handleUpload = async (ev) => {
     const result = await uploadImage(ev);
     if (!result.error) {
-      setImage({ url: result.url, name: result.name });
+      setImage({ url: result.url, name: result.name, path: result.path });
       setUploadResult(result);
     } else if (result.error) {
       setUploadResult(result);
     }
+  };
+  const handleRemove = async () => {
+    // TODO handle result
+    await removeImage(image);
+    // if (!result.error) {
+    setImage({ url: '', name: '' });
+    setUploadResult({});
+    // }
   };
 
   return (
@@ -45,6 +54,7 @@ const BulletinDialog = ({ showDialog, setShowDialog }) => {
         <NewBulletin
           onSubmit={handleSubmit}
           handleUpload={handleUpload}
+          handleRemove={handleRemove}
           uploadResult={uploadResult}
         />
       </DialogContent>
