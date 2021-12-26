@@ -29,24 +29,28 @@ const BulletinDialog = ({ showDialog, setShowDialog }) => {
     }
   };
   const handleRemove = async () => {
-    // TODO handle result
-    await removeImage(image);
-    // if (!result.error) {
-    setImage({ url: '', name: '' });
-    setUploadResult({});
-    // }
+    const result = await removeImage(image);
+    if (!result.error) {
+      setImage({ url: '', name: '', path: '' });
+      setUploadResult({});
+    } else if (result.error) {
+      setUploadResult(result);
+    }
   };
-
+  const handleCloseDialog = () => {
+    setShowDialog(false);
+    handleRemove(image);
+  };
   return (
     <Dialog
       id="image-preview-dialog"
       type="full-page"
       visible={showDialog}
-      onRequestClose={() => setShowDialog(false)}
+      onRequestClose={handleCloseDialog}
       aria-labelledby="dialog-title"
     >
       <AppBar theme="secondary">
-        <AppBarNav onClick={() => setShowDialog(false)} aria-label="Close">
+        <AppBarNav onClick={handleCloseDialog} aria-label="Close">
           <AiOutlineArrowLeft size={30} />
         </AppBarNav>
       </AppBar>

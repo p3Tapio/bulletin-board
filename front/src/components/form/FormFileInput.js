@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import PropTypes from 'prop-types';
 import { Button } from '@react-md/button';
@@ -15,11 +15,9 @@ import {
   uploaded,
 } from './FileInputStyles';
 
-const FormFileInput = ({ handleUpload, handleRemove, uploadResult }) => {
-  const [files, setFiles] = useState([]);
-
+const FormFileInput = ({ handleUpload, handleRemove, uploadResult, files, setFiles }) => {
   const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({
-    accept: 'image/jpeg, image/png, image/jpg, image/JPEG, image/PNG, image/JPG',
+    accept: 'image/jpeg, image/png, image/jpg',
     onDrop: (acceptedFiles) => {
       setFiles(
         acceptedFiles.map((file) =>
@@ -153,6 +151,12 @@ FormFileInput.propTypes = {
     error: PropTypes.string,
     path: PropTypes.string,
   }).isRequired,
+  setFiles: PropTypes.func,
+  files: PropTypes.arrayOf(PropTypes.shape({ file: PropTypes.instanceOf(File) })),
+};
+FormFileInput.defaultProps = {
+  setFiles: () => {},
+  files: [],
 };
 ShowResult.propTypes = {
   result: PropTypes.shape({

@@ -9,7 +9,11 @@ const useImage = () => {
       if (file && file.name) {
         const parts = file.name.split('.');
         const type = parts[parts.length - 1];
-        if (type !== 'jpeg' && type !== 'jpg' && type !== 'png') {
+        if (
+          type.toLowerCase() !== 'jpeg' &&
+          type.toLowerCase() !== 'jpg' &&
+          type.toLowerCase() !== 'png'
+        ) {
           return { error: 'Wrong file format' };
         }
         const uploadDetails = await fileService.create({ name: upload.name, type });
@@ -28,10 +32,9 @@ const useImage = () => {
     try {
       if (image && image.path) {
         const result = await fileService.remove({ path: image.path });
-        // TODO  if ok, else if not
         return result;
       }
-      return { error: 'Invalid params' };
+      return { error: `Invalid params: ${image}` };
     } catch (err) {
       return { error: err };
     }

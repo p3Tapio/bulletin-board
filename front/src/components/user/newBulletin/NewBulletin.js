@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text } from '@react-md/typography';
 import { Formik } from 'formik';
 import { Form } from '@react-md/form';
@@ -48,8 +48,11 @@ const NewBulletin = ({ onSubmit, handleUpload, handleRemove, uploadResult }) => 
 };
 
 const BulletForm = ({ onSubmit, resetForm, values, handleUpload, handleRemove, uploadResult }) => {
+  const [files, setFiles] = useState([]);
   const handleReset = () => {
     resetForm();
+    setFiles([]);
+    handleRemove();
   };
   return (
     <Form>
@@ -69,6 +72,8 @@ const BulletForm = ({ onSubmit, resetForm, values, handleUpload, handleRemove, u
             handleUpload={handleUpload}
             handleRemove={handleRemove}
             uploadResult={uploadResult}
+            files={files}
+            setFiles={setFiles}
           />
         </div>
       </div>

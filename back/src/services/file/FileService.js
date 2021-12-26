@@ -1,5 +1,6 @@
 const aws = require('aws-sdk');
 const { v4: uuidv4 } = require('uuid');
+const logger = require('../../logger');
 
 module.exports = class FileService {
   constructor(app) {
@@ -36,7 +37,6 @@ module.exports = class FileService {
     }
   }
   async remove(data) {
-    // TODO return results 
     const s3Params = {
       Bucket: this.bucket,
       Key: data.path,
@@ -45,14 +45,18 @@ module.exports = class FileService {
       await this.s3.headObject(s3Params).promise();
       try {
         await this.s3.deleteObject(s3Params).promise();
-        // return ..
+        const message = `Remove file success. File deleted: ${data.path}`;
+        logger.info(message);
+        return { success: message };
       } catch (err) {
-        console.error('Failed to delete: ', err);
-        // return ... 
+        const message = `Remove File error. Failed to delete: ${err}`;
+        logger.error(message);
+        return { error: message };
       }
     } catch (err) {
-      console.error('file not found: ', err);
-      // return ...
+      const message = `Remove file error. File not found: ${err}`;
+      logger.error(message);
+      return { error: message };
     }
   }
 };
