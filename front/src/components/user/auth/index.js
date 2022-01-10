@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useLocation } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import useQuery from '../../../hooks/useQuery';
 import { loginUser, registerUser } from '../../../state/actions/userActions';
 import Login from './Login';
 import Register from './Register';
@@ -8,12 +9,13 @@ import Register from './Register';
 const Authorization = () => {
   const dispatch = useDispatch();
   const user = useSelector((x) => x.userState.userData);
-  const location = useLocation();
+  const query = useQuery();
+  const register = query.get('register');
   const [showRegister, setShowRegister] = useState();
 
   useEffect(() => {
-    setShowRegister(location.state ? location.state.showRegister : false);
-  }, [location.state]);
+    setShowRegister(register === 'true');
+  }, [register]);
 
   const handleRegister = (values, { resetForm }) => {
     dispatch(registerUser(values));

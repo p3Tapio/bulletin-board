@@ -38,7 +38,7 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <div>
+      <div id="app-div">
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/bulletins" component={Bulletins} />
