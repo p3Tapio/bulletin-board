@@ -23,6 +23,7 @@ module.exports = function (app) {
       image: {
         url: { type: String },
         name: { type: String },
+        // blurhash?
       },
       user: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     },
